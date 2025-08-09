@@ -3,9 +3,8 @@
 # rknpu firmware
 #
 ################################################################################
-RKNPU_FW_VERSION = 1.0.0
-RKNPU_FW_SITE_METHOD = local
-RKNPU_FW_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/rknpu-fw
+RKNPU_FW_VERSION = rknpu-fw
+RKNPU_FW_SITE = $(call github,JeffyCN,mirrors,$(RKNPU_FW_VERSION))
 
 RKNPU_FW_PCIE_TYPE = npu_fw_pcie/*
 RKNPU_FW_USB_TYPE = npu_fw/*

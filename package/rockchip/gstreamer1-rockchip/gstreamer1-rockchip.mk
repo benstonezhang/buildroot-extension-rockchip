@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-GSTREAMER1_ROCKCHIP_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/gstreamer-rockchip
-GSTREAMER1_ROCKCHIP_VERSION = master
-GSTREAMER1_ROCKCHIP_SITE_METHOD = local
+GSTREAMER1_ROCKCHIP_VERSION = gstreamer-rockchip
+GSTREAMER1_ROCKCHIP_SITE = $(call github,JeffyCN,mirrors,$(GSTREAMER1_ROCKCHIP_VERSION))
 
 GSTREAMER1_ROCKCHIP_LICENSE_FILES = COPYING
 GSTREAMER1_ROCKCHIP_LICENSE = LGPL-2.1

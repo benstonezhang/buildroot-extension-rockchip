@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-ROCKCHIP_MPP_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/mpp
-ROCKCHIP_MPP_VERSION = develop
-ROCKCHIP_MPP_SITE_METHOD = local
+ROCKCHIP_MPP_VERSION = mpp-dev
+ROCKCHIP_MPP_SITE = $(call github,JeffyCN,mirrors,$(ROCKCHIP_MPP_VERSION))
 
 ROCKCHIP_MPP_LICENSE = Apache-2.0, MIT
 ROCKCHIP_MPP_LICENSE_FILES = LICENSES/Apache-2.0 LICENSES/MIT

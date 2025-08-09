@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-RKWIFIBT_VERSION = 1.0.0
-RKWIFIBT_SITE_METHOD = local
-RKWIFIBT_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/rkwifibt
+RKWIFIBT_VERSION = rkwifibt
+RKWIFIBT_SITE = $(call github,JeffyCN,mirrors,$(RKWIFIBT_VERSION))
 RKWIFIBT_LICENSE = ROCKCHIP
 RKWIFIBT_LICENSE_FILES = LICENSE
 

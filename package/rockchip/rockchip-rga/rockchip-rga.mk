@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-ROCKCHIP_RGA_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/linux-rga
-ROCKCHIP_RGA_VERSION = master
-ROCKCHIP_RGA_SITE_METHOD = local
+ROCKCHIP_RGA_VERSION = linux-rga-multi
+ROCKCHIP_RGA_SITE = $(call github,JeffyCN,mirrors,$(ROCKCHIP_RGA_VERSION))
 
 ROCKCHIP_RGA_LICENSE = Apache-2.0
 ROCKCHIP_RGA_LICENSE_FILES = COPYING

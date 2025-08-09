@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-CAMERA_ENGINE_RKISP_VERSION = 1.0
-CAMERA_ENGINE_RKISP_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/camera_engine_rkisp
-CAMERA_ENGINE_RKISP_SITE_METHOD = local
+CAMERA_ENGINE_RKISP_VERSION = camera_engine_rkisp
+CAMERA_ENGINE_RKISP_SITE = $(call github,JeffyCN,mirrors,$(CAMERA_ENGINE_RKISP_VERSION))
 
 CAMERA_ENGINE_RKISP_LICENSE = Apache V2.0
 CAMERA_ENGINE_RKISP_LICENSE_FILES = NOTICE
