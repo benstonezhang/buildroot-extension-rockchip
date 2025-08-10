@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-RKTOOLKIT_VERSION = master
-RKTOOLKIT_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/rktoolkit
-RKTOOLKIT_SITE_METHOD = local
+RKTOOLKIT_VERSION = main
+RKTOOLKIT_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/external,rktoolkit,$(RKTOOLKIT_VERSION))
 RKTOOLKIT_LICENSE_FILES = LICENSE
 RKTOOLKIT_LICENSE = Apache-2.0
 

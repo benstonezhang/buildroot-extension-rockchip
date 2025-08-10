@@ -1,5 +1,5 @@
+N4_VERSION =
 N4_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/app/n4
-N4_SITE_METHOD = local
 N4_INSTALL_STAGING = NO
 
 N4_DEPENDENCIES = host-ninja libserialport libv4l rkmedia

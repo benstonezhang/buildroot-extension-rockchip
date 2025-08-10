@@ -2,14 +2,14 @@
 
 TARGET=$1
 
-OTA_SCRIPT="$TARGET/../../../../output/firmware/RK_OTA_update.sh"
+OTA_SCRIPT="$BR2_EXTERNAL_ROCKCHIP_PATH/firmware/RK_OTA_update.sh"
 PROJECT_OUTPUT_IMAGE=$(realpath $OTA_SCRIPT)
 OTA_SCRIPT_PATH=$(realpath $OTA_SCRIPT)
 ERASE_MISC_SCRIPT="$TARGET/usr/bin/RK_OTA_erase_misc.sh"
 PROJECT_FILE_RECOVERY_LUNCH_SCRIPT=$TARGET/etc/init.d/S99lunch_recovery
 PROJECT_FILE_RECOVERY_SCRIPT=$TARGET/etc/init.d/S15linkmount_recovery
 PARAMETER_FILE=$CHIP_DIR/$RK_PARAMETER
-RKLUNCH_FILE=$TARGET/../../../board/rockchip/common/tinyrecovery/RkLunch-recovery.sh
+RKLUNCH_FILE=$BR2_EXTERNAL_ROCKCHIP_PATH/board/rockchip/common/tinyrecovery/RkLunch-recovery.sh
 
 mkdir -p $(dirname $PROJECT_FILE_RECOVERY_LUNCH_SCRIPT)
 cat > $PROJECT_FILE_RECOVERY_LUNCH_SCRIPT <<EOF
@@ -173,7 +173,7 @@ linkdev(){
 		storage_dev_prefix=mtdblock
 		part_num=0
 	else
-		echo unknow device 
+		echo unknow device
 	fi
 
 	if [ ! -d "/dev/block/by-name" ];then

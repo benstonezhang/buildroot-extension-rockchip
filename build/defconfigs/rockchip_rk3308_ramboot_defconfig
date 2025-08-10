@@ -2,5 +2,5 @@
 #include "base/recovery.config"
 #include "chips/rk3308_arm.config"
 BR2_PACKAGE_LUKSMETA=y
-BR2_ROOTFS_OVERLAY+="board/rockchip/common/security-ramdisk-overlay/"
+BR2_ROOTFS_OVERLAY+="$(BR2_EXTERNAL_ROCKCHIP_PATH)/board/rockchip/common/security-ramdisk-overlay/"
 

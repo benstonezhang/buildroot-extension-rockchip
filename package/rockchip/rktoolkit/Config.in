@@ -5,4 +5,5 @@ config BR2_PACKAGE_RKTOOLKIT
 
 config BR2_PACKAGE_RKTOOLKIT_STATIC
 	bool "static tools"
+	depends on BR2_SHARED_STATIC_LIBS
 	depends on BR2_PACKAGE_RKTOOLKIT

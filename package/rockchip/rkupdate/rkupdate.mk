@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-RKUPDATE_VERSION = develop
-RKUPDATE_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/rkupdate
-RKUPDATE_SITE_METHOD = local
+RKUPDATE_VERSION = main
+RKUPDATE_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/external,rkupdate,$(RKUPDATE_VERSION))
 
 RKUPDATE_LICENSE = Apache V2.0
 RKUPDATE_LICENSE_FILES = NOTICE

@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-RKADK_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/app/rkadk
-
-RKADK_SITE_METHOD = local
+RKADK_VERSION = main
+RKADK_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/bsp,rkadk,$(RKADK_VERSION))
 
 RKADK_INSTALL_STAGING = YES
 
@@ -23,6 +22,5 @@ RKADK_CONF_OPTS += "-DRKADK_CHIP=rk3506"
 RKADK_CONF_OPTS += "-DENABLE_STORAGE=OFF"
 RKADK_CONF_OPTS += "-DUSE_RKAIQ=OFF"
 endif
-
 
 $(eval $(cmake-package))

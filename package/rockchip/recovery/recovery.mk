@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-RECOVERY_VERSION = develop
-RECOVERY_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/recovery
-RECOVERY_SITE_METHOD = local
+RECOVERY_VERSION = main
+RECOVERY_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux,recovery,$(RECOVERY_VERSION))
 
 RECOVERY_LICENSE = ROCKCHIP
 RECOVERY_LICENSE_FILES = NOTICE

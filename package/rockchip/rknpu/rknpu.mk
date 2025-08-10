@@ -3,9 +3,8 @@
 # rknpu
 #
 ################################################################################
-RKNPU_VERSION = 1.5.0
-RKNPU_SITE_METHOD = local
-RKNPU_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/rknpu
+RKNPU_VERSION = 1.7.3
+RKNPU_SITE = $(call github,rockchip-linux,rknpu,v$RKNPU_VERSION())
 NPU_TEST_FILE = $(@D)/test
 RKNPU_INSTALL_STAGING = YES
 

@@ -29,7 +29,7 @@ endef
 ifeq ($(BR2_PACKAGE_RKNPU2_EXAMPLE),)
 $(eval $(generic-package))
 else
-RKNPU2_SUBDIR = examples/rknn_common_test
+RKNPU2_SUBDIR = rknpu2/examples/rknn_common_test
 
 define RKNPU2_INSTALL_TARGET_EXAMPLE
 	cp -r $(@D)/rknpu2/runtime/Linux/librknn_api/$(RKNPU2_ARCH)/* \

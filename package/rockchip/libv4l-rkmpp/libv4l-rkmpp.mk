@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-LIBV4L_RKMPP_SITE = https://github.com/JeffyCN/libv4l-rkmpp.git
-LIBV4L_RKMPP_VERSION = 6f131c901ab59b2f8f7796cd9be3419894c3341b
-LIBV4L_RKMPP_SITE_METHOD = git
+LIBV4L_RKMPP_VERSION = 1.8.0
+LIBV4L_RKMPP_SITE = $(call github,JeffyCN,libv4l-rkmpp,v$(LIBV4L_RKMPP_VERSION))
 LIBV4L_RKMPP_AUTORECONF = YES
 
 LIBV4L_RKMPP_LICENSE = LGPL-2.1

@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-ROCKIT_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/rockit
-
-ROCKIT_SITE_METHOD = local
+ROCKIT_VERSION = main
+ROCKIT_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux,rockit,$(ROCKIT_VERSION))
 
 ROCKIT_INSTALL_STAGING = YES
 

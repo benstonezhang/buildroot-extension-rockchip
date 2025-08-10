@@ -4,8 +4,7 @@
 #
 ################################################################################
 
-CAMERA_ENGINE_RKAIQ_VERSION = be96b36bab4c3533f7cd011385539b565578ab8b
-#CAMERA_ENGINE_RKAIQ_VERSION = bd19d1ee0d4c21945f156f75a8eb1cdafed2777a
+CAMERA_ENGINE_RKAIQ_VERSION = bd19d1ee0d4c21945f156f75a8eb1cdafed2777a
 CAMERA_ENGINE_RKAIQ_SITE = $(call github,JeffyCN,mirrors,$(CAMERA_ENGINE_RKAIQ_VERSION))
 CAMERA_ENGINE_RKAIQ_INSTALL_STAGING = YES
 

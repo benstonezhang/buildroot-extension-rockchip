@@ -21,6 +21,13 @@ function choose_board() {
 	done
 }
 
+function patch_buildroot() {
+    sed -E 's|^(\s+source "package/rockchip.*)$|#\1|' -i "$BUILDROOT_DIR/package/Config.in"
+    find "$BUILDROOT_DIR/package" -type f -name 'rockchip-*.mk' | while read -r; do
+        mv "$REPLY" "${REPLY}.sav"
+    done
+}
+
 function check_include() {
     echo "$1" | grep '^#include' >/dev/null
 }
@@ -73,12 +80,15 @@ if [ "$RK_BOARD_ARRAY_LEN" -eq 0 ]; then
 fi
 
 if [ "$#" -eq 3 ]; then
-    RK_BOARD="rockchip_${1}_defconfig"
+    RK_BOARD="rockchip_${3}_defconfig"
 else
     choose_board
 fi
 
-mkdir -p "$TOP_DIR/configs"
+patch_buildroot
+
+mkdir -p "$TOP_DIR/configs" "$OUTPUT_DIR"
 generate_defconfig > "$TOP_DIR/configs/$RK_BOARD"
 
-echo make -C "$BUILDROOT_DIR" BR2_EXTERNAL="$TOP_DIR" O="$OUTPUT_DIR" "$RK_BOARD"
+echo "Done. To apply defconfig: "
+echo "make -C \"$BUILDROOT_DIR\" BR2_EXTERNAL=\"$TOP_DIR\" O=\"$OUTPUT_DIR\" $RK_BOARD"

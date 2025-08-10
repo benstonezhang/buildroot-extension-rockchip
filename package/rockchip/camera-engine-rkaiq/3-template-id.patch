@@ -1,0 +1,11 @@
+--- a/rkaiq/iq_parser/tinyxml2.h	2024-04-08 09:48:30.000000000 +0800
++++ b/rkaiq/iq_parser/tinyxml2.h	2025-08-10 18:15:16.188978624 +0800
+@@ -169,7 +169,7 @@
+ class DynArray
+ {
+ public:
+-    DynArray< T, INIT >()
++    DynArray()
+     {
+         mem = pool;
+         allocated = INIT;

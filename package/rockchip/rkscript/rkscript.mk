@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-RKSCRIPT_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/rkscript
-RKSCRIPT_SITE_METHOD = local
+RKSCRIPT_VERSION = main
+RKSCRIPT_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/external,rkscript,$(RKSCRIPT_VERSION))
 RKSCRIPT_LICENSE = ROCKCHIP
 RKSCRIPT_LICENSE_FILES = LICENSE
 

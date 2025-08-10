@@ -4,9 +4,8 @@
 #
 ################################################################################
 
-ROCKCHIP_UAC_APP_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/uac_app/uac_app
-
-ROCKCHIP_UAC_APP_SITE_METHOD = local
+ROCKCHIP_UAC_APP_VERSION = main
+ROCKCHIP_UAC_APP_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/external,uac_app,$(ROCKCHIP_UAC_APP_VERSION))
 
 ROCKCHIP_UAC_APP_INSTALL_STAGING = YES
 

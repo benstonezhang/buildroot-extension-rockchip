@@ -1,8 +1,7 @@
 # add test tool for rockchip platform
 
-ROCKCHIP_TEST_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/rockchip-test
-ROCKCHIP_TEST_VERSION = master
-ROCKCHIP_TEST_SITE_METHOD = local
+ROCKCHIP_TEST_VERSION = main
+ROCKCHIP_TEST_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux,rockchip-test,$(ROCKCHIP_TEST_VERSION))
 ROCKCHIP_TEST_LICENSE = ROCKCHIP
 ROCKCHIP_TEST_LICENSE_FILES = LICENSE
 
