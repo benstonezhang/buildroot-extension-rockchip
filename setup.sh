@@ -22,8 +22,19 @@ function choose_board() {
 }
 
 function patch_buildroot() {
+    echo 'patch buildroot sources:'
+    echo '  mask rockchip-mali and rockchip-rkbin'
     sed -E 's|^(\s+source "package/rockchip.*)$|#\1|' -i "$BUILDROOT_DIR/package/Config.in"
     find "$BUILDROOT_DIR/package" -type f -name 'rockchip-*.mk' | while read -r; do
+        mv "$REPLY" "${REPLY}.sav"
+    done
+
+    echo '  add ffmpeg-rockchip'
+    grep -q BR2_PACKAGE_ROCKCHIP "$BUILDROOT_DIR/package/ffmpeg/Config.in" > /dev/null || \
+    patch -d "$BUILDROOT_DIR" -p1 < "$ROCKCHIP_DIR/patches/1-ffmpeg-mpp-rga.patch"
+    grep -q '633e912db087a91a84a2fd7b931ff79662457215dfedac88008dd6a4e2a80ef9' "$BUILDROOT_DIR/package/ffmpeg/ffmpeg.hash" 2>/dev/null || \
+    echo 'sha256  633e912db087a91a84a2fd7b931ff79662457215dfedac88008dd6a4e2a80ef9  ffmpeg-7.1.tar.gz' >> "$BUILDROOT_DIR/package/ffmpeg/ffmpeg.hash"
+    find "$BUILDROOT_DIR/package/ffmpeg" -type f -name '*.patch' | while read -r; do
         mv "$REPLY" "${REPLY}.sav"
     done
 }
@@ -37,14 +48,14 @@ function check_comment() {
 }
 
 function merge_defconfig() {
-    # echo "merge file: $SCRIPTS_DIR/rockchip/$1"
+    # echo "merge file: $ROCKCHIP_DIR/configs/$1"
     while read -r; do
         if check_include "$REPLY"; then
             merge_defconfig "$(echo "$REPLY" | sed 's/^#include *"//; s/".*//')"
         elif ! check_comment "$REPLY"; then
             echo "$REPLY"
         fi
-    done < "$SCRIPTS_DIR/rockchip/$1"
+    done < "$ROCKCHIP_DIR/configs/$1"
 }
 
 function generate_defconfig() {
@@ -54,7 +65,7 @@ function generate_defconfig() {
         elif ! check_comment "$REPLY"; then
             echo "$REPLY"
         fi
-    done < "$SCRIPTS_DIR/defconfigs/$RK_BOARD"
+    done < "$ROCKCHIP_DIR/defconfigs/$RK_BOARD"
 }
 
 if [ "$#" -lt 2 ]; then
@@ -62,20 +73,20 @@ if [ "$#" -lt 2 ]; then
     exit 1
 fi
 
-SCRIPTS_DIR="$(dirname "$(realpath "$0")")"
+TOP_DIR="$(dirname "$(realpath "$0")")"
 BUILDROOT_DIR="$(realpath "$1")"
-TOP_DIR="$(realpath "${SCRIPTS_DIR}/..")"
 OUTPUT_DIR="$2"
 
 echo "Top of tree: $TOP_DIR"
 echo "Buildroot:   $BUILDROOT_DIR"
 echo "Output:      $OUTPUT_DIR"
 
-RK_BOARD_ARRAY=($(cd "${SCRIPTS_DIR}/defconfigs/" && ls -1 rockchip_*_defconfig | sort))
+ROCKCHIP_DIR="${TOP_DIR}/rockchip"
+mapfile -t RK_BOARD_ARRAY < <(cd "${ROCKCHIP_DIR}/defconfigs/" && ls -1 rockchip_*_defconfig | sort)
 RK_BOARD_ARRAY_LEN=${#RK_BOARD_ARRAY[@]}
 
 if [ "$RK_BOARD_ARRAY_LEN" -eq 0 ]; then
-    echo "No available configs in ${SCRIPTS_DIR}/defconfigs"
+    echo "No available configs in ${ROCKCHIP_DIR}/defconfigs"
     exit 1
 fi
 
@@ -90,5 +101,10 @@ patch_buildroot
 mkdir -p "$TOP_DIR/configs" "$OUTPUT_DIR"
 generate_defconfig > "$TOP_DIR/configs/$RK_BOARD"
 
-echo "Done. To apply defconfig: "
+echo "Done."
+echo
+echo "Available defconfigs:"
+(cd "$TOP_DIR/configs/" && ls -1 rockchip_*_defconfig | sort)
+echo
+echo "To apply config for $RK_BOARD:"
 echo "make -C \"$BUILDROOT_DIR\" BR2_EXTERNAL=\"$TOP_DIR\" O=\"$OUTPUT_DIR\" $RK_BOARD"
