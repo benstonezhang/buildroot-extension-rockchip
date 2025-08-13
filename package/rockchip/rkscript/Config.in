@@ -1,6 +1,5 @@
 config BR2_PACKAGE_RKSCRIPT
 	bool "rockchip script"
-	depends on BR2_PACKAGE_HAS_UDEV
 	help
 	  Rockchip helper scripts.
 
@@ -70,7 +69,7 @@ config BR2_PACKAGE_RKSCRIPT_USB_ADBD
 
 config BR2_PACKAGE_RKSCRIPT_USB_MTP
 	bool "mtp"
-	default y if BR2_PACKAGE_MTP
+	default y if BR2_PACKAGE_UMTPRD
 	help
 	  Media Transfer Protocal (MTP).
 

@@ -4,14 +4,13 @@
 #
 ################################################################################
 
-TEE_USER_APP_VERSION = develop
-TEE_USER_APP_SITE = $(BR2_EXTERNAL_ROCKCHIP_PATH)/external/security
-TEE_USER_APP_SITE_METHOD = local
+TEE_USER_APP_VERSION = linux-6.1-stan-rkr4.2
+TEE_USER_APP_SITE = $(call gitlab,rockchip_linux_sdk_6.1/android/rk/platform/system,rk_tee_user,$(TEE_USER_APP_VERSION))
 
 TEE_USER_APP_LICENSE = GPL-2.0
-TEE_USER_APP_LICENSE_FILES = rk_tee_user/v2/LICENSE.md
+TEE_USER_APP_LICENSE_FILES = v2/LICENSE.md
 
-TEE_USER_APP_OUTPUT=$(@D)/rk_tee_user/${BR2_PACKAGE_TEE_USER_APP_TEE_VERSION}/out
+TEE_USER_APP_OUTPUT=$(@D)/${BR2_PACKAGE_TEE_USER_APP_TEE_VERSION}/out
 TEE_USER_APP_PRE_BIN=$(@D)/bin/optee_${BR2_PACKAGE_TEE_USER_APP_TEE_VERSION}
 
 ifeq ($(BR2_ARCH_IS_64),y)
@@ -25,12 +24,12 @@ TEE_USER_APP_ARCH=
 endif
 
 define TEE_USER_APP_BUILD_CMDS
-	cp $(TOPDIR)/package/rockchip/tee-user-app/extra_app/host \
-		$(@D)/rk_tee_user/${BR2_PACKAGE_TEE_USER_APP_TEE_VERSION}/host/extra_app -r ; \
-	cp $(TOPDIR)/package/rockchip/tee-user-app/extra_app/ta \
-		$(@D)/rk_tee_user/${BR2_PACKAGE_TEE_USER_APP_TEE_VERSION}/ta/extra_app -r
+	cp $(BR2_EXTERNAL_ROCKCHIP_PATH)/package/rockchip/tee-user-app/extra_app/host \
+		$(@D)/${BR2_PACKAGE_TEE_USER_APP_TEE_VERSION}/host/extra_app -r ; \
+	cp $(BR2_EXTERNAL_ROCKCHIP_PATH)/package/rockchip/tee-user-app/extra_app/ta \
+		$(@D)/${BR2_PACKAGE_TEE_USER_APP_TEE_VERSION}/ta/extra_app -r
 
-	cd $(@D)/rk_tee_user/$(BR2_PACKAGE_TEE_USER_APP_TEE_VERSION) ; \
+	cd $(@D)/$(BR2_PACKAGE_TEE_USER_APP_TEE_VERSION) ; \
 	AARCH64_TOOLCHAIN=$(TEE_USER_APP_TOOLCHAIN_64) ARM32_TOOLCHAIN=$(TEE_USER_APP_TOOLCHAIN_32) \
 			  ./build.sh $(BR2_PACKAGE_TEE_USER_APP_COMPILE_CMD)
 endef

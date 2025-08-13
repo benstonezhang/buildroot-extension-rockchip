@@ -1,6 +1,6 @@
 # add test tool for rockchip platform
 
-ROCKCHIP_TEST_VERSION = main
+ROCKCHIP_TEST_VERSION = linux-6.1-stan-rkr4.2
 ROCKCHIP_TEST_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux,rockchip-test,$(ROCKCHIP_TEST_VERSION))
 ROCKCHIP_TEST_LICENSE = ROCKCHIP
 ROCKCHIP_TEST_LICENSE_FILES = LICENSE

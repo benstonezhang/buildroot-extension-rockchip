@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-RECOVERY_VERSION = main
+RECOVERY_VERSION = linux-6.1-stan-rkr4.2
 RECOVERY_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux,recovery,$(RECOVERY_VERSION))
 
 RECOVERY_LICENSE = ROCKCHIP

@@ -3,8 +3,10 @@
 # rknpu2
 #
 ################################################################################
-RKNPU2_VERSION = 2.3.2
-RKNPU2_SITE = $(call github,airockchip,rknn-toolkit2,v$(RKNPU2_VERSION))
+#RKNPU2_VERSION = 2.3.2
+#RKNPU2_SITE = $(call github,airockchip,rknn-toolkit2,v$(RKNPU2_VERSION))
+RKNPU2_VERSION = linux-6.1-stan-rkr4
+RKNPU2_SITE = $(call gitlab,rockchip_linux_sdk_6.1/rk,rknpu2,$(RKNPU2_VERSION))
 RKNPU2_INSTALL_STAGING = YES
 
 RKNPU2_LICENSE = ROCKCHIP
@@ -13,28 +15,28 @@ RKNPU2_LICENSE_FILES = LICENSE
 RKNPU2_ARCH = $(call qstrip,$(BR2_PACKAGE_RKNPU2_ARCH))
 
 define RKNPU2_INSTALL_TARGET_CMDS
-	cp -r $(@D)/rknpu2/runtime/Linux/rknn_server/$(RKNPU2_ARCH)/* \
+	cp -r $(@D)/runtime/Linux/rknn_server/$(RKNPU2_ARCH)/* \
 		$(TARGET_DIR)/
-	cp -r $(@D)/rknpu2/runtime/Linux/librknn_api/$(RKNPU2_ARCH)/* \
+	cp -r $(@D)/runtime/Linux/librknn_api/$(RKNPU2_ARCH)/* \
 		$(TARGET_DIR)/usr/lib/
 endef
 
 define RKNPU2_INSTALL_STAGING_CMDS
-	cp -r $(@D)/rknpu2/runtime/Linux/librknn_api/$(RKNPU2_ARCH)/* \
+	cp -r $(@D)/runtime/Linux/librknn_api/$(RKNPU2_ARCH)/* \
 		$(STAGING_DIR)/usr/lib/
-	cp -rT $(@D)/rknpu2/runtime/Linux/librknn_api/include \
+	cp -rT $(@D)/runtime/Linux/librknn_api/include \
 		$(STAGING_DIR)/usr/include/rknn
 endef
 
 ifeq ($(BR2_PACKAGE_RKNPU2_EXAMPLE),)
 $(eval $(generic-package))
 else
-RKNPU2_SUBDIR = rknpu2/examples/rknn_common_test
+RKNPU2_SUBDIR = examples/rknn_common_test
 
 define RKNPU2_INSTALL_TARGET_EXAMPLE
-	cp -r $(@D)/rknpu2/runtime/Linux/librknn_api/$(RKNPU2_ARCH)/* \
+	cp -r $(@D)/runtime/Linux/librknn_api/$(RKNPU2_ARCH)/* \
 		$(STAGING_DIR)/usr/lib/
-	cp -rT $(@D)/rknpu2/runtime/Linux/librknn_api/include \
+	cp -rT $(@D)/runtime/Linux/librknn_api/include \
 		$(STAGING_DIR)/usr/include/rknn
 
 	cp $(@D)/$(RKNPU2_SUBDIR)/rknn_common_test $(TARGET_DIR)/usr/bin/

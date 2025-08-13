@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-RKSCRIPT_VERSION = main
+RKSCRIPT_VERSION = linux-6.1-stan-rkr4.2
 RKSCRIPT_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/external,rkscript,$(RKSCRIPT_VERSION))
 RKSCRIPT_LICENSE = ROCKCHIP
 RKSCRIPT_LICENSE_FILES = LICENSE
@@ -179,11 +179,7 @@ endif # PCM
 ifeq ($(BR2_PACKAGE_HAS_UDEV),y)
 define RKSCRIPT_INSTALL_TARGET_UDEV_RULES
 	$(INSTALL) -m 0755 -d $(TARGET_DIR)/lib/udev/rules.d/
-	$(INSTALL) -m 0644 -D $(@D)/61-partition-init.rules \
-		$(TARGET_DIR)/lib/udev/rules.d/
-	$(INSTALL) -m 0644 -D $(@D)/88-rockchip-camera.rules \
-		$(TARGET_DIR)/lib/udev/rules.d/
-	$(INSTALL) -m 0644 -D $(@D)/99-rockchip-permissions.rules \
+	$(INSTALL) -m 0644 -D $(@D)/*.rules \
 		$(TARGET_DIR)/lib/udev/rules.d/
 endef
 RKSCRIPT_POST_INSTALL_TARGET_HOOKS += RKSCRIPT_INSTALL_TARGET_UDEV_RULES

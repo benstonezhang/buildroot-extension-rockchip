@@ -1,4 +1,5 @@
 #include "base/base.config"
+#include "bus/pci.config"
 #include "chips/rk3399_aarch64.config"
 #include "font/chinese.config"
 #include "fs/exfat.config"
@@ -17,6 +18,6 @@
 #include "tools/benchmark.config"
 #include "tools/common.config"
 #include "tools/test.config"
-#include "chromium.config"
+#include "network/chromium.config"
 #include "powermanager.config"
 #include "weston.config"

@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-RKUPDATE_VERSION = main
+RKUPDATE_VERSION = linux-6.1-stan-rkr4.2
 RKUPDATE_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/external,rkupdate,$(RKUPDATE_VERSION))
 
 RKUPDATE_LICENSE = Apache V2.0

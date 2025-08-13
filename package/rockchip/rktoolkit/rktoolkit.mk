@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-RKTOOLKIT_VERSION = main
+RKTOOLKIT_VERSION = linux-6.1-stan-rkr4.2
 RKTOOLKIT_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/external,rktoolkit,$(RKTOOLKIT_VERSION))
 RKTOOLKIT_LICENSE_FILES = LICENSE
 RKTOOLKIT_LICENSE = Apache-2.0

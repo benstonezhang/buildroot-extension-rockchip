@@ -1,4 +1,4 @@
-RKWIFIBT_APP_VERSION = main
+RKWIFIBT_APP_VERSION = linux-6.1-stan-rkr4.2
 RKWIFIBT_APP_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/external,rkwifibt-app,$(RKWIFIBT_APP_VERSION))
 RKWIFIBT_APP_INSTALL_STAGING = YES
 
@@ -21,9 +21,16 @@ define RKWIFIBT_APP_INSTALL_TARGET_CMDS
 	$(RKWIFIBT_APP_INSTALL_COMMON)
 endef
 
+ARCH_DIR = COMMON
+
+ifneq ($(BR2_PACKAGE_RV1126_RV1109),)
+ARCH_DIR = RV1126
+endif
+
 define RKWIFIBT_PRE_BUILD_HOOK
-	$(INSTALL) -D -m 0755 $(@D)/$(SODIR)/librkwifibt.so $(TARGET_DIR)/usr/lib/
-	$(INSTALL) -D -m 0755 $(@D)/$(SODIR)/librkwifibt.so $(STAGING_DIR)/usr/lib/
+	$(INSTALL) -D -m 0755 $(@D)/$(ARCH_DIR)/$(SODIR)/librkwifibt.so $(TARGET_DIR)/usr/lib/
+	$(INSTALL) -D -m 0755 $(@D)/$(ARCH_DIR)/$(SODIR)/librkwifibt.so $(STAGING_DIR)/usr/lib/
+	$(INSTALL) -D -m 0755 $(@D)/include/* $(STAGING_DIR)/usr/include/
 endef
 
 RKWIFIBT_APP_PRE_BUILD_HOOKS += RKWIFIBT_PRE_BUILD_HOOK

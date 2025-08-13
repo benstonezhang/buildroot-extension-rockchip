@@ -4,9 +4,10 @@
 #
 ################################################################################
 
-RKADK_VERSION = main
+RKADK_VERSION = linux-6.1-stan-rkr4.2
 RKADK_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/bsp,rkadk,$(RKADK_VERSION))
 
+RKADK_LDFLAGS = -L$(TARGET_DIR)/usr/lib
 RKADK_INSTALL_STAGING = YES
 
 define RKADK_LINK_GIT
@@ -16,11 +17,72 @@ endef
 
 RKADK_POST_RSYNC_HOOKS += RKADK_LINK_GIT
 
-ifneq ($(BR2_PACKAGE_RK3506)$(BR2_PACKAGE_RK3308),)
+define RKADK_VERSION_H
+	[ -e $(@D)/include/version.h ] || cp $(@D)/version/version.in  $(@D)/include/version.h
+	sed "s/@VERSION_INFO@/\"$(RKADK_VERSION)\"/; s/@BUILD_INFO@/\"built $$(date '+%Y-%m-%d %H:%M:%S')\"/" -i  $(@D)/include/version.h
+endef
+
+RKADK_POST_CONFIGURE_HOOKS += RKADK_VERSION_H
+
 RKADK_DEPENDENCIES += rockit common_algorithm
-RKADK_CONF_OPTS += "-DRKADK_CHIP=rk3506"
-RKADK_CONF_OPTS += "-DENABLE_STORAGE=OFF"
-RKADK_CONF_OPTS += "-DUSE_RKAIQ=OFF"
+
+ifeq ($(BR2_PACKAGE_CAMERA_ENGINE_RKAIQ), y)
+RKADK_DEPENDENCIES += camera-engine-rkaiq
+RKADK_CONF_OPTS += -DUSE_RKAIQ=ON
 endif
+
+ifeq ($(BR2_PACKAGE_RKADK_COMMON_FUNCTIONS), y)
+RKADK_CONF_OPTS += -DENABLE_COMMON_FUNCTIONS=ON
+endif
+
+ifeq ($(BR2_PACKAGE_RKADK_AOV), y)
+RKADK_CONF_OPTS += -DENABLE_AOV=ON
+endif
+
+ifeq ($(BR2_PACKAGE_RKADK_FILE_CACHE), y)
+RKADK_CONF_OPTS += -DENABLE_FILE_CACHE=ON
+endif
+
+ifeq ($(BR2_PACKAGE_RKADK_EIS), y)
+RKADK_CONF_OPTS += -DENABLE_EIS=ON
+endif
+
+ifeq ($(BR2_PACKAGE_RKADK_JPEG_SLICE), y)
+RKADK_CONF_OPTS += -DENABLE_JPEG_SLICE=ON
+endif
+
+ifeq ($(BR2_PACKAGE_RKADK_STORAGE), y)
+RKADK_DEPENDENCIES += rkfsmk
+RKADK_CONF_OPTS += -DENABLE_STORAGE=ON
+endif
+
+ifeq ($(BR2_PACKAGE_RKADK_DISPLAY), y)
+RKADK_CONF_OPTS += -DENABLE_DISPLAY=ON
+endif
+
+ifeq ($(BR2_PACKAGE_RKADK_PLAYER), y)
+RKADK_CONF_OPTS += -DENABLE_PLAYER=ON
+endif
+
+ifeq ($(BR2_PACKAGE_RKADK_STATIC_LIBRARY), y)
+RKADK_CONF_OPTS += -DBUILD_STATIC_LIBRARY=ON
+endif
+
+ifeq ($(BR2_PACKAGE_RKADK_EXAMPLES), y)
+RKADK_CONF_OPTS += -DBUILD_EXAMPLES=ON
+endif
+
+RKADK_CONF_OPTS += -DOS_LINUX=ON
+
+ifneq ($(BR2_PACKAGE_RK3506)$(BR2_PACKAGE_RK3308),)
+RKADK_CONF_OPTS += "-DRKADK_CHIP=rk3506"
+else ifneq ($(BR2_PACKAGE_RK3576),)
+RKADK_CONF_OPTS += "-DRKADK_CHIP=rk3576"
+else
+RKADK_CONF_OPTS += "-DRKADK_CHIP=OFF"
+endif
+
+#RKADK_CONF_OPTS += -DBUILD_DIR=$(BUILD_DIR)
+#RKADK_CONF_OPTS += -DBUILD_DIR=$($(PKG)_BUILDDIR)
 
 $(eval $(cmake-package))

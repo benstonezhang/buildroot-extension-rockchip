@@ -4,14 +4,18 @@
 #
 ################################################################################
 
-RKWIFIBT_VERSION = rkwifibt
-RKWIFIBT_SITE = $(call github,JeffyCN,mirrors,$(RKWIFIBT_VERSION))
+#RKWIFIBT_VERSION = rkwifibt
+#RKWIFIBT_SITE = $(call github,JeffyCN,mirrors,$(RKWIFIBT_VERSION))
+RKWIFIBT_VERSION = linux-6.1-stan-rkr4.2
+RKWIFIBT_SITE = $(call gitlab,rockchip_linux_sdk_6.1/linux/external,rkwifibt,$(RKWIFIBT_VERSION))
 RKWIFIBT_LICENSE = ROCKCHIP
 RKWIFIBT_LICENSE_FILES = LICENSE
 
+RKWIFIBT_CFLAGS = -D_GNU_SOURCE
+
 ifeq ($(BR2_PACKAGE_RKWIFIBT_STATIC),y)
-RKWIFIBT_CFLAGS = $(TARGET_CFLAGS) -static
-RKWIFIBT_LDFLAGS = $(TARGET_LDFLAGS) -static
+RKWIFIBT_CFLAGS += $(TARGET_CFLAGS) -static
+RKWIFIBT_LDFLAGS += $(TARGET_LDFLAGS) -static
 endif
 
 $(eval $(meson-package))

@@ -2,7 +2,7 @@
 
 TARGET=$1
 
-OTA_SCRIPT="$BR2_EXTERNAL_ROCKCHIP_PATH/firmware/RK_OTA_update.sh"
+OTA_SCRIPT="$O/firmware/RK_OTA_update.sh"
 PROJECT_OUTPUT_IMAGE=$(realpath $OTA_SCRIPT)
 OTA_SCRIPT_PATH=$(realpath $OTA_SCRIPT)
 ERASE_MISC_SCRIPT="$TARGET/usr/bin/RK_OTA_erase_misc.sh"

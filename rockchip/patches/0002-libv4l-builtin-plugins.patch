@@ -1,0 +1,13 @@
+--- a/package/libv4l/libv4l.mk	2025-06-24 00:32:11.000000000 +0800
++++ b/package/libv4l/libv4l.mk	2025-08-13 19:19:00.209522130 +0800
+@@ -20,6 +20,10 @@
+ LIBV4L_CONF_OPTS += -Dv4l-plugins=false -Dv4l-wrappers=false
+ endif
+
++ifeq ($(BR2_PACKAGE_LIBV4L_BUILTIN_PLUGINS),y)
++LIBV4L_CONF_OPTS += -Dv4l-builtin-plugins=true
++endif
++
+ ifeq ($(BR2_PACKAGE_ALSA_LIB),y)
+ LIBV4L_DEPENDENCIES += alsa-lib
+ endif

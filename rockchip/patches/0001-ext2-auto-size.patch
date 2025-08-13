@@ -1,0 +1,29 @@
+--- a/fs/ext2/ext2.mk	2025-06-24 00:32:11.000000000 +0800
++++ b/fs/ext2/ext2.mk	2025-08-12 17:46:29.659927678 +0800
+@@ -26,6 +26,18 @@
+
+ ROOTFS_EXT2_DEPENDENCIES = host-e2fsprogs
+
++ifeq ($(BR2_TARGET_ROOTFS_EXT2)-$(ROOTFS_EXT2_SIZE),y-auto)
++define ROOTFS_EXT2_CMD
++	rm -f $@
++	FILE_SIZE="$$(du --apparent-size -sm $(TARGET_DIR) | cut -f1)"
++	ALIGN_SIZE="$$(($$(find $(TARGET_DIR) | wc -l) * 4096 / 1024 / 1024))"
++	ROOTFS_SIZE="$$(( ($$FILE_SIZE + $$ALIGN_SIZE) * 110 / 100 + 64 ))"
++	$(HOST_DIR)/sbin/mkfs.ext$(BR2_TARGET_ROOTFS_EXT2_GEN) \
++		$(ROOTFS_EXT2_OPTS) $@ "$${ROOTFS_SIZE}M"
++	$(HOST_DIR)/sbin/resize2fs -M $@
++	$(HOST_DIR)/sbin/e2fsck -fy $@
++endef
++else
+ define ROOTFS_EXT2_CMD
+ 	rm -f $@
+ 	$(HOST_DIR)/sbin/mkfs.ext$(BR2_TARGET_ROOTFS_EXT2_GEN) $(ROOTFS_EXT2_OPTS) $@ \
+@@ -35,6 +48,7 @@
+ 	     exit $$ret; \
+ 	}
+ endef
++endif
+
+ ifneq ($(BR2_TARGET_ROOTFS_EXT2_GEN),2)
+ define ROOTFS_EXT2_SYMLINK

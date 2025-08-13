@@ -1,12 +1,21 @@
 --- a/include/RkBtBase.h	2023-12-15 09:19:24.000000000 +0800
 +++ b/include/RkBtBase.h	2025-08-10 21:58:19.145548108 +0800
-@@ -645,7 +645,7 @@
+@@ -949,7 +949,7 @@
   */
- int rk_bt_disconnect_by_addr(char *address);
- 
+ int rk_bt_disconnect_by_addr(char *addr, char *addr_type);
+
 -//TODO void rk_bt_adapter_info(char *data);
 +void rk_bt_adapter_info(char *data);
- 
+
  /**
   * @ingroup  rk_bt_basic
+--- a/test/rk_wifi_test.c   2025-08-13 09:47:28.580758358 +0800
++++ b/test/rk_wifi_test.c   2025-08-13 09:47:43.206803664 +0800
+@@ -13,6 +13,7 @@
+ #include "utility.h"
+ #include "Rk_wifi.h"
+ #include "Rk_softap.h"
++#include "RkBtBase.h"
 
+ typedef struct {
+ 	pthread_mutex_t wifi_mutex;

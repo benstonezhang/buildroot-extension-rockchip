@@ -57,7 +57,7 @@ link_all_partitions_byname() {
 check_block_ready() {
 	for i in $1
 	do
-		[ -f "/dev/block/by-name/$i" ] || return -1
+		[ -b "/dev/block/by-name/$i" ] || echo fail
 	done
 	return 0
 }
@@ -74,8 +74,8 @@ do
 done
 
 # check a/b system
-if [ ! -z "$(cat /proc/cmdline | grep android_slotsufix)" ]; then
-	SLOT_SUFIX=$(cat /proc/cmdline | sed "s#.*android_slotsufix=##" | cut -d ' ' -f 1)
+if [ ! -z "$(cat /proc/cmdline | grep "androidboot.slot_suffix")" ]; then
+	SLOT_SUFIX=$(cat /proc/cmdline | sed "s#.*androidboot.slot_suffix=##" | cut -d ' ' -f 1)
 	SYSTEM_NAME=system
 fi
 
@@ -87,8 +87,8 @@ mkdir -p /dev/block/by-name
 # link all partitions by name
 while true
 do
-	link_all_partitions_byname "$BLOCK_NECESSARY"
-	[ "$(check_block_ready)" ] || break;
+	link_all_partitions_byname
+	[ "$(check_block_ready "$BLOCK_NECESSARY")" ] || break;
 done
 
 OFFSET=

@@ -2,6 +2,7 @@ config BR2_PACKAGE_TEE_USER_APP
 	bool "Rockchip TEE user App or linux"
 	help
 	  Rockchip TEE user App or linux.
+	depends on BR2_PACKAGE_OPTEE_CLIENT
 
 if BR2_PACKAGE_TEE_USER_APP
 
