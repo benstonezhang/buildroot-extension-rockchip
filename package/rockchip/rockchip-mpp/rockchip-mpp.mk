@@ -6,6 +6,8 @@
 
 ROCKCHIP_MPP_VERSION = mpp-dev
 ROCKCHIP_MPP_SITE = $(call github,JeffyCN,mirrors,$(ROCKCHIP_MPP_VERSION))
+#ROCKCHIP_MPP_VERSION = linux-6.1-stan-rkr4
+#ROCKCHIP_MPP_SITE = $(call gitlab,rockchip_linux_sdk_6.1/rk,mpp,$(ROCKCHIP_MPP_VERSION))
 
 ROCKCHIP_MPP_LICENSE = Apache-2.0, MIT
 ROCKCHIP_MPP_LICENSE_FILES = LICENSES/Apache-2.0 LICENSES/MIT

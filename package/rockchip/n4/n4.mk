@@ -1,8 +1,8 @@
-N4_SITE = $(TOPDIR)/../app/n4
-N4_SITE_METHOD = local
+N4_VERSION = 6e3fc43844746cfbf4498f63f27472023c01f0a0
+N4_SITE = $(call github,TinkerBoard-Linux,rockchip-linux-app-n4,$(N4_VERSION))
 N4_INSTALL_STAGING = NO
 
-N4_DEPENDENCIES = host-ninja libserialport libv4l rkmedia
+N4_DEPENDENCIES = host-ninja libserialport libv4l camera-engine-rkaiq
 
 define INSTALL_N4_KERNEL_HEADER
 cp $(BR2_EXTERNAL_ROCKCHIP_PATH)/kernel/include/uapi/linux/rk-usbacm-msg.h $(STAGING_DIR)/usr/include/linux/

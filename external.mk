@@ -1,1 +1,1 @@
-include $(sort $(wildcard $(BR2_EXTERNAL_ROCKCHIP_PATH)/package/rockchip/*/*.mk))
+include $(sort $(wildcard $(BR2_EXTERNAL_ROCKCHIP_PATH)/package/*/*.mk))

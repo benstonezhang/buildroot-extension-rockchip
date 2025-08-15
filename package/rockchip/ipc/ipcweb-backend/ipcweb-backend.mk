@@ -1,7 +1,7 @@
 # Rockchip's MPP(Multimedia Processing Platform)
-IPCWEB_BACKEND_SITE = $(TOPDIR)/../app/ipcweb-backend
-IPCWEB_BACKEND_VERSION = release
-IPCWEB_BACKEND_SITE_METHOD = local
+IPCWEB_BACKEND_VERSION = rk3588-linux-6.1-rkr6
+IPCWEB_BACKEND_SITE = $(call github,mixtile-rockchip,mixtile-sdk-linux-app-web-new-ipcweb-backend,$(IPCWEB_BACKEND_VERSION))
+
 IPCWEB_BACKEND_LICENSE = ROCKCHIP
 IPCWEB_BACKEND_LICENSE_FILES = LICENSE
 

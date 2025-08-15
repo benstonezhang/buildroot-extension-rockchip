@@ -6,7 +6,7 @@ config BR2_PACKAGE_IVA
 if BR2_PACKAGE_IVA
 
 choice
-	default BR2_PACKAGE_IVA_RK3588
+	default BR2_PACKAGE_IVA_RK3576
 	prompt "target platform(32bit/64bit)"
 
 config BR2_PACKAGE_IVA_RK3576

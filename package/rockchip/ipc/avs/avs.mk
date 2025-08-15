@@ -1,5 +1,5 @@
-AVS_SITE = $(TOPDIR)/../external/avs
-AVS_SITE_METHOD = local
+AVS_VERSION = rk3588-linux-6.1-rkr6
+AVS_SITE = $(call github,mixtile-rockchip,mixtile-sdk-linux-ipc-media-avs,$(AVS_VERSION))
 
 AVS_INSTALL_STAGING = YES
 

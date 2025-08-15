@@ -1,0 +1,9 @@
+# Source Han Sans Fonts
+
+menu "Source Han Sans Fonts"
+	source "$BR2_EXTERNAL_ROCKCHIP_PATH/package/source-han-sans/source-han-sans-cn/Config.in"
+	source "$BR2_EXTERNAL_ROCKCHIP_PATH/package/source-han-sans/source-han-sans-hk/Config.in"
+	source "$BR2_EXTERNAL_ROCKCHIP_PATH/package/source-han-sans/source-han-sans-jp/Config.in"
+	source "$BR2_EXTERNAL_ROCKCHIP_PATH/package/source-han-sans/source-han-sans-kr/Config.in"
+	source "$BR2_EXTERNAL_ROCKCHIP_PATH/package/source-han-sans/source-han-sans-tw/Config.in"
+endmenu

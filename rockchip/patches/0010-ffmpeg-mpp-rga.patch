@@ -1,6 +1,6 @@
 --- a/package/ffmpeg/Config.in	2025-06-24 00:32:11.000000000 +0800
 +++ b/package/ffmpeg/Config.in	2025-08-11 20:40:33.006709423 +0800
-@@ -25,6 +25,16 @@
+@@ -25,6 +25,17 @@
 
  if BR2_PACKAGE_FFMPEG
 
@@ -11,6 +11,7 @@
 +         Rockchip platforms that support MPP (Media Process Platform)
 +         and RGA (2D Raster Graphic Acceleration).
 +       depends on BR2_PACKAGE_ROCKCHIP
++       default y
 +       select BR2_PACKAGE_ROCKCHIP_MPP
 +       select BR2_PACKAGE_ROCKCHIP_RGA
 +

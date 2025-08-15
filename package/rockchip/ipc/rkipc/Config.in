@@ -8,7 +8,7 @@ config BR2_PACKAGE_RKIPC
 
 choice
 prompt "Platform type"
-	default BR2_PACKAGE_RKIPC_RK3588
+	default BR2_PACKAGE_RKIPC_RK3576
 	help
 	  Select a platform type.
 

@@ -1,5 +1,5 @@
-SAMPLES_SITE = $(TOPDIR)/../external/samples
-SAMPLES_SITE_METHOD = local
+SAMPLES_VERSION = rk3588-linux-6.1-rkr6
+SAMPLES_SITE = $(call github,mixtile-rockchip,mixtile-sdk-linux-ipc-media-samples,$(SAMPLES_VERSION))
 SAMPLES_LICENSE = ROCKCHIP
 SAMPLES_LICENSE_FILES = LICENSE
 

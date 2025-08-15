@@ -1,5 +1,5 @@
-IVA_SITE = $(TOPDIR)/../external/iva
-IVA_SITE_METHOD = local
+IVA_VERSION = rk3588-linux-6.1-rkr6
+IVA_SITE = $(call github,mixtile-rockchip,mixtile-sdk-linux-ipc-media-iva,$(IVA_VERSION))
 IVA_LICENSE = ROCKCHIP
 IVA_LICENSE_FILES = LICENSE
 

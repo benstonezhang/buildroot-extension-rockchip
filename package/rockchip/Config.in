@@ -19,7 +19,7 @@ config BR2_PACKAGE_ROCKCHIP_HAS_ISP3
 	  Has Rockchip ISP3
 
 choice
-	default BR2_PACKAGE_RK3588
+	default BR2_PACKAGE_RK3576
 	prompt "Rockchip SoC"
 
 config BR2_PACKAGE_RV1126_RV1109

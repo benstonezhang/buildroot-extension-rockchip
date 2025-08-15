@@ -1,5 +1,6 @@
-RKIPC_SITE = $(TOPDIR)/../app/rkipc
-RKIPC_SITE_METHOD = local
+RKIPC_VERSION = rk3588-linux-6.1-rkr6
+RKIPC_SITE = $(call github,mixtile-rockchip,mixtile-sdk-linux-app-rkipc,$(RKIPC_VERSION))
+
 RKIPC_LICENSE = ROCKCHIP
 RKIPC_LICENSE_FILES = LICENSE
 
@@ -30,7 +31,7 @@ ifeq ($(BR2_PACKAGE_RKIPC_RK3588_MULTI_IPC), y)
 endif
 
 ifeq ($(BR2_PACKAGE_RKIPC_RV1126), y)
-    RKIPC_DEPENDENCIES += rkmedia rkfsmk
+    RKIPC_DEPENDENCIES += camera-engine-rkaiq rkfsmk
     RKIPC_CONF_OPTS += -DCOMPILE_FOR_RV1126_RKMEDIA=ON
 endif
 

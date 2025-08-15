@@ -23,22 +23,25 @@ function choose_board() {
 
 function patch_buildroot() {
     echo 'patch buildroot sources:'
-    echo '  mask rockchip-mali and rockchip-rkbin'
+    echo 'mask rockchip-mali and rockchip-rkbin'
     sed -E 's|^(\s+source "package/rockchip)|#\1|' -i "$BUILDROOT_DIR/package/Config.in"
     find "$BUILDROOT_DIR/package" -type f -name 'rockchip-*.mk' | while read -r; do
         mv "$REPLY" "${REPLY}.sav"
     done
 
-    echo '  patch ext2 image size'
+    echo 'patch ext2 image size'
     grep -q 'y-auto' "$BUILDROOT_DIR/fs/ext2/ext2.mk" > /dev/null || \
     patch -d "$BUILDROOT_DIR" -p1 < "$ROCKCHIP_DIR/patches/0001-ext2-auto-size.patch"
 
-    echo '  patch libv4l'
+    echo 'patch libv4l'
     grep -q 'v4l-builtin-plugins' "$BUILDROOT_DIR/package/libv4l/libv4l.mk" > /dev/null || \
         patch -d "$BUILDROOT_DIR" -p1 < "$ROCKCHIP_DIR/patches/0002-libv4l-builtin-plugins.patch"
     install -C -m 644 -t "$BUILDROOT_DIR/package/libv4l" "${TOP_DIR}/package/libv4l"/*.patch
 
-    echo '  add ffmpeg-rockchip'
+    echo 'patch uboot'
+    install -C -m 644 -t "$BUILDROOT_DIR/boot/uboot/" "$ROCKCHIP_DIR/patches/0003-uboot-edid-cmd.patch"
+
+    echo 'add ffmpeg-rockchip'
     grep -q BR2_PACKAGE_ROCKCHIP "$BUILDROOT_DIR/package/ffmpeg/Config.in" > /dev/null || \
         patch -d "$BUILDROOT_DIR" -p1 < "$ROCKCHIP_DIR/patches/0010-ffmpeg-mpp-rga.patch"
     grep -q '633e912db087a91a84a2fd7b931ff79662457215dfedac88008dd6a4e2a80ef9' "$BUILDROOT_DIR/package/ffmpeg/ffmpeg.hash" 2>/dev/null || \
